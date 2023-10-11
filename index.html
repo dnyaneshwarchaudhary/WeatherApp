@@ -14,10 +14,90 @@
         
         <input type = "text" placeholder="enter city name" spellcheck="false">
         <button><img src = "images/search.png"></button>
-        <p>Lorem ipsum dolor sit.</p>
+
+    </div>
+
+    <div class="error">
+        <p>Invalid city name</p>
+    </div>
+
+    <div class="weather">
+        <img src ="images/rain.png" class="weather-icon">
+        <h1 class="temp">22°C</h1>
+        <h2 class="city">New York</h2>
+        <div class="details">
+            <div class="col">
+                <img src="images/humidity.png" alt="">
+                <div>
+                    <p class="humidity">50%</p>
+                    <p>humidity</p>
+                </div>
+            </div>
+            <div class="col">
+                <img src="images/wind.png" alt="">
+                <div>
+                    <p class="wind">15 Km/hr</p>
+                    <p>Wind Speed</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<script>
 
+    const key = "6ebc82cda4934c8fbd142145231110";
+    const apiUrl = "https://api.weatherapi.com/v1/current.json?";
+
+    const searchbox = document.querySelector(".search input");
+    const searchbtn = document.querySelector(".search button"); 
+    const weatherIcon = document.querySelector(".weather-icon");
+
+    async function checkWeather(city){
+
+    const response = await fetch (apiUrl + `key=${key}`+`&q=${city}&aqi=yes`)
+  
+        if (response.status == 404){
+            document.querySelector(".error").style.display = "block";
+            document.querySelector(".weather").style.display = "none";
+        }
+        else {
+
+            
+        }
+  
+  
+  
+    var data = await response.json();
+
+ 
+
+    document.querySelector(".city").innerHTML = data.location.name;
+    document.querySelector(".temp").innerHTML = Math.round(data.current.temp_c) + "°C";
+    document.querySelector(".humidity").innerHTML = data.current.humidity + "%";
+    document.querySelector(".wind").innerHTML = data.current.wind_kph + " km/h";
+
+    if (data.current.condition.text == "Clouds"){
+        weatherIcon.src = "images/clouds.png";
+    }
+    else if (data.current.condition.text == "Sunny"){
+        weatherIcon.src = "images/clear.png";
+    }
+    else if (data.current.condition.text == "Rain"){
+        weatherIcon.src = "images/rain.png";
+    }
+    else if (data.current.condition.text == "Drizzle"){
+        weatherIcon.src = "images/drizzle.png";
+    }
+
+    document.querySelector(".weather").style.display = "block";
+    console.log(data);
+
+}
+
+searchbtn.addEventListener("click",()=>{
+    checkWeather(searchbox.value);
+})
+</script>
 
 </body>
 </html>

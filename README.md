@@ -1,2 +1,3 @@
 # WeatherApp
---This is my first project in HTML,CSS,Javascript
+--This is my first project in HTML,CSS,Javascript. 
+--Project 1
