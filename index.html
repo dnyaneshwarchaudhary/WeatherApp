@@ -62,7 +62,25 @@
         }
         else {
 
-            
+        if (data.current.condition.text == "Clouds"){
+        weatherIcon.src = "images/clouds.png";
+        }
+
+        else if (data.current.condition.text == "Sunny"){
+        weatherIcon.src = "images/clear.png";
+        }
+
+        else if (data.current.condition.text == "Rain"){
+        weatherIcon.src = "images/rain.png";
+        }
+
+        else if (data.current.condition.text == "Drizzle"){
+           weatherIcon.src = "images/drizzle.png";
+        }
+
+        document.querySelector(".weather").style.display = "block";
+        console.log(data);
+
         }
   
   
@@ -76,21 +94,7 @@
     document.querySelector(".humidity").innerHTML = data.current.humidity + "%";
     document.querySelector(".wind").innerHTML = data.current.wind_kph + " km/h";
 
-    if (data.current.condition.text == "Clouds"){
-        weatherIcon.src = "images/clouds.png";
-    }
-    else if (data.current.condition.text == "Sunny"){
-        weatherIcon.src = "images/clear.png";
-    }
-    else if (data.current.condition.text == "Rain"){
-        weatherIcon.src = "images/rain.png";
-    }
-    else if (data.current.condition.text == "Drizzle"){
-        weatherIcon.src = "images/drizzle.png";
-    }
-
-    document.querySelector(".weather").style.display = "block";
-    console.log(data);
+  
 
 }
 
